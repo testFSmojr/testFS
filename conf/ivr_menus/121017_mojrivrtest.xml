@@ -1,0 +1,52 @@
+<!—- 
+
+ — Calls come to freeswitch and freeswitch core analyse the number and check expression and based on that it rout the call…
+ - here, call is treated as IVR, so will play IVR menu.. have set answer to play properly pass media on channel 
+ - have set timeout if extension does not match, call be dropped after 10 sec and max-failures/max-timeouts is just for test
+ - play sounds and files based on digit pressed
+->
+
+<context name=“test_ivr_demo”>
+
+<extension name="ivr_demo_test3”>
+    <condition field="destination_number" expression=“^(8018054603)$”>
+      <action application=“Answer”/>
+      <action application="ivr" data="ivr-test"/>
+      <action application=“Hangup”/>
+    </condition>
+</extension>
+
+<context>
+
+<include>
+ <menu name=“ivr-test”
+     timeout="10000"
+     max-failures="3"
+     max-timeouts="3">
+
+      <entry action="menu-play-sound" digits="1" param="say: hello”/>
+      <entry action="menu-sub" digits=“2” param=“ivr-test_submenu"/>                 
+     <entry action=“menu-play-sound” digits=“3” param=“playback music.wav”/>
+
+ </menu>
+
+<menu name=“ivr-test_submenu”>
+     <entry action=“menu-play-sound” param=“playback goodby.wav”/>
+     <entry action=“menu-exec-app” param=“hangup”/>
+</menu>
+ 
+</include>
+
+
+<!--
+scenario 3: 
+
+I am not sure this scenario 3 directly work through dialplan, might be completed with some script or any channel param or any stream related param.
+
+if above does not work then we will have to change source code of freeswitch.
+
+In the past I had implemented configurations for bulk calls to different queues, but I had never made similar incoming call balancing.
+
+If there is an additional module that makes these settings I would like to know, if it is dial plan I would like to know too :)
+-->
+

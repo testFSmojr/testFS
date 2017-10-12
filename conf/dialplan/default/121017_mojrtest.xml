@@ -1,0 +1,29 @@
+<context name=“test_demo”>
+
+<!—- 
+
+ — Calls come to freeswitch and freeswitch core analyse the number and check expression and based on that it rout the call…
+ - Answer the call and park but does not pickup here after park
+
+->
+<extension name=“test1”>
+    <condition field="destination_number" expression=“^(\d\d\d820\d\d\d\d)$”>
+      <action application=“Answer”/>
+      <action application=“park”/>
+    </condition>
+</extension>
+
+<!—- 
+
+ — Calls come to freeswitch and freeswitch core analyse the number and check expression and based on that it rout the call…
+ - immediate hangup 
+
+->
+
+<extension name=“test2”>
+    <condition field="destination_number" expression=“^(\d\d\d821\d\d\d\d)$”>
+      <action application=“Hangup”/>
+    </condition>
+</extension>
+
+<context>

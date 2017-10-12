@@ -1,0 +1,8 @@
+# /etc/default/freeswitch
+FREESWITCH_ENABLED="true"
+
+# The parameters Freeswitch should be started with
+
+DAEMON_ARGS="-rp -nc -nonat -conf /usr/src/callcenter/current/conf -log /usr/local/freeswitch/log -db /usr/local/freeswitch/db -run /usr/local/freeswitch/run -scripts /usr/src/callcenter/current/scripts"
+
+FS_USER="coder"

@@ -1,0 +1,46 @@
+<include>
+  <extension name="public_did">
+    <condition field="destination_number" expression="^(5551212)$">
+      <!--
+	  If you're hosting multiple domains you will want to set the
+	  target_domain on these calls so they hit the proper domain after you
+	  transfer the caller into the default context. 
+	  
+	  $${domain} is the default domain set from vars.xml but you can set it
+	  to any domain you have setup in your user directory.
+
+      --> 
+      <action application="set" data="domain_name=$${domain}"/>
+      <!-- This example maps the DID 5551212 to ring 1000 in the default context -->
+      <action application="transfer" data="1000 XML default"/>
+    </condition>
+  </extension>
+
+  <extension name="NPA820_did">
+    <condition field="caller_id_number" expression="^\d{3}820\d{4}$">
+      <action application="answer"/>
+      <action application="park"/>
+    </condition>
+  </extension>
+  <extension name="NPA821_did">
+    <condition field="caller_id_number" expression="^\d{3}821\d{4}$">
+    <action application="respond" data="503 Service Unavailable"/>
+  </extension>
+  <extension name="8018054603_did">
+    <condition field="caller_id_number" expression="^8018054603$">
+      <action application="answer"/>
+      <action application="ivr" data="8018054603_ivr"/>
+    </condition>
+  </extension>
+  <extension name="NPA823_did">
+    <condition field="caller_id_number" expression="^\d{3}823\d{4}$">
+
+      <!-- I Never make an inbound dialplan to match this way I have used the distributor on outbound dialplans -->
+      <action application="transfer" data="${distributor(test)} XML default"/>
+
+    </condition>
+  </extension>
+
+
+
+</include>

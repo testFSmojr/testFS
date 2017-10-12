@@ -1,0 +1,15 @@
+<include>
+
+  <menu name="8018054603_ivr"
+      invalid-sound="ivr/ivr-that_was_an_invalid_entry.wav"
+      exit-sound="voicemail/vm-goodbye.wav"
+      timeout="10000"
+      max-failures="3"
+      max-timeouts="3">
+
+    <entry action="menu-sub" digits="1" param="transfer 43556 XML default"/>
+    <entry action="menu-sub" digits="2" param="transfer 4663293 XML default"/>
+    <entry action="menu-sub" digits="3" param="transfer 68742 XML default"/>
+  </menu>
+
+</include>

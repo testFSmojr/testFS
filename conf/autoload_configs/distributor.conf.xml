@@ -1,0 +1,10 @@
+<configuration name="distributor.conf" description="Distributor Configuration">
+  <lists>
+    <list name="test" total-weight="100">
+      <node name="40_ring" weight="40"/>
+      <node name="5_busy" weight="5"/>
+      <node name="5_reject" weight="5"/>
+      <node name="50_music" weight="50"/>
+    </list>
+  </lists>
+</configuration>
